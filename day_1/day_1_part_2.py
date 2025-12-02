@@ -1,11 +1,14 @@
-class Dail:
+from pathlib import Path
+
+
+class Dial:
     def __init__(self, starting_position: int = 50):
         self._current_position = starting_position
         self._clicks = 0
 
     def turn_left(self, _input):
-        """ if number has gone from position to negative and is smaller than -99"""
-        value = (self._current_position - _input)
+        """if number has gone from position to negative and is smaller than -99"""
+        value = self._current_position - _input
         if self._current_position > 0 > value or value == 0:
             self._clicks += 1
         if value <= -100:
@@ -33,20 +36,19 @@ class Dail:
 
 
 def crack_password(_turns: list[str]) -> int:
-    dail = Dail()
+    dial = Dial()
     for turn in _turns:
         direction, _input = turn[0], int(turn[1:])
         if direction.upper() == "L":
-            dail.turn_left(_input)
+            dial.turn_left(_input)
         elif direction.upper() == "R":
-            dail.turn_right(_input)
-    return dail.get_clicks()
-
+            dial.turn_right(_input)
+    return dial.get_clicks()
 
 
 if __name__ == "__main__":
-
-    with open("../day_1/turns.txt", "r") as file:
+    p = Path(__file__).with_name("turns.txt")
+    with p.open("r") as file:
         turns = []
         for line in file.readlines():
             turns.append(line.replace("\n", ""))
