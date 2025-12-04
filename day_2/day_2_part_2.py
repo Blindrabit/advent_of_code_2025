@@ -14,7 +14,6 @@ if __name__ == "__main__":
 
     p = Path(__file__).with_name("input.txt")
     with p.open("r") as file:
-        turns = []
         for line in file.readlines():
             id_ranges = line.split(",")
     invalid_count = 0
